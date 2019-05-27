@@ -1,5 +1,4 @@
 import React from "react";
-import "./footer.scss";
 
 function Menu() {
   return (
@@ -23,7 +22,7 @@ function Menu() {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="nav-link" href="#">
-              Home <span className="sr-only">(current)</span>
+              Homes <span className="sr-only">(current)</span>
             </a>
           </li>
           <li className="nav-item">

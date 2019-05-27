@@ -1,0 +1,9 @@
+{
+  "healers": [
+    { "id": 1, "name": "json-server", "description": "typicode", "photo": "edgar-centro.jpg" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}
