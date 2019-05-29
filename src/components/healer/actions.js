@@ -36,7 +36,7 @@ const list = () => {
         payload: healers
       });
     });*/
-  let healers = [
+  /*let healers = [
     {
       id: 1,
       name: "json-server",
@@ -44,10 +44,9 @@ const list = () => {
       photo: "edgar-centro.jpg"
     }
   ];
-  console.log("dispatching", healers);
+  console.log("dispatching", healers);*/
   return {
-    type: types.LIST,
-    payload: healers
+    type: types.LIST
   };
 };
 

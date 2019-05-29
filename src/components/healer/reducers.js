@@ -1,5 +1,4 @@
 import types from "./types";
-import healerActions from "./actions";
 
 const initialState = {
   items: [],
@@ -11,11 +10,11 @@ export default (state = initialState, action) => {
     case types.CREATE:
       // do something and return new state
       break;
-    case types.LIST:
-      console.log("reducer list firing", healerActions.list());
+    case types.LIST + "_saga":
+      console.log("reducer list firing", action);
       return {
         ...state,
-        items: healerActions.list().payload
+        items: action.payload
       };
     case types.READ:
       // do something and return new state

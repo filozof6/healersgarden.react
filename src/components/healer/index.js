@@ -3,6 +3,7 @@ import "./healer.scss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import healerActions from "./actions";
+import HealerCard from "./partial/card";
 
 class Healers extends Component {
   componentWillMount() {
@@ -19,19 +20,14 @@ class Healers extends Component {
 
   render() {
     const healerCards = this.props.healers.map(healer =>
-      <div key={healer.id}>
-        <h3>
-          {healer.name}
-        </h3>
-        <p>
-          {healer.description}
-        </p>
-      </div>
+      <HealerCard key={healer.id} healer={healer} />
     );
     return (
       <div>
-        Healers index<br />
-        {healerCards}
+        <h1>Healers index</h1>
+        <div className="healers">
+          {healerCards}
+        </div>
       </div>
     );
   }
@@ -45,6 +41,4 @@ const mapStateToProps = state => ({
   healers: state.healers.items
 });
 
-console.log("lulz");
-console.log(healerActions);
 export default connect(mapStateToProps, healerActions)(Healers);

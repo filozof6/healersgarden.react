@@ -1,6 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+/* jquery dependency for bootstrap
+commented now so webpack will not fire notices
 import $ from "jquery";
 import Popper from "popper.js";
+*/
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from "react";
 import ReactDOM from "react-dom";

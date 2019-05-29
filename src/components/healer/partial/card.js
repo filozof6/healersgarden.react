@@ -1,32 +1,42 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../healer.scss";
-import Menu from "components/menu";
+import PropTypes from "prop-types";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import {
+  faPhone,
+  faMapMarkerAlt,
+  faAt
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function HealerCard() {
+const images = require.context("assets/images/healers", true);
+
+const HealerCard = props => {
   return (
     <div className="card healer-card">
       <img
         className="card-img-top"
-        src={require(`assets/images/healers/edgar-centro.jpg`)}
+        src={images(`./${props.healer.photo}`)}
         alt="Card image cap"
       />
       <div className="card-body">
-        <h5 className="card-title">Healers name</h5>
+        <h5 className="card-title">
+          {props.healer.name}
+        </h5>
         <p className="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          {props.healer.description}
         </p>
       </div>
       <ul className="list-group list-group-flush">
         <li className="list-group-item">
-          <FontAwesomeIcon icon="faPhone" />+421 907 056 052
+          <FontAwesomeIcon icon={faPhone} />+421 907 056 052
         </li>
         <li className="list-group-item">
-          <FontAwesomeIcon icon="faAt" />example@example.com
+          <FontAwesomeIcon icon={faAt} />example@example.com
         </li>
         <li className="list-group-item">
-          <FontAwesomeIcon icon="faMapMarkerAlt" /> Home <br />
+          <FontAwesomeIcon icon={faMapMarkerAlt} /> Home <br />
           Example Street 15 <br />
           PL 12130; Katowice <br />
           Poland
@@ -42,6 +52,10 @@ function HealerCard() {
       </div>
     </div>
   );
-}
+};
+
+HealerCard.propTypes = {
+  healer: PropTypes.object.isRequired
+};
 
 export default HealerCard;
