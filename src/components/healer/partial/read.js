@@ -1,83 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+import HealerCard from "./card";
+import PropTypes from "prop-types";
 
-function Menu() {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        Navbar
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
+const GET_HEALER = gql`
+    query Healer($healerId: String!) {
+        healer(id: $healerId) {
+            id
+            name
+            description
+            photo
+        }
+    }
+`;
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Homes <span className="sr-only">(current)</span>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Link
-            </a>
-          </li>
-          <li className="nav-item dropdown">
-            <a
-              className="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
+class Read extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { healerId: this.props.match.params.id };
+    }
+    render() {
+        const healerId = this.state.healerId;
+        const healer = ({ healerId }) => (
+            <Query
+                query={GET_HEALER}
+                variables={{ healerId: this.state.healerId }}
+                notifyOnNetworkStatusChange
             >
-              Dropdown
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-              <div className="dropdown-divider" />
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
-            </div>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#">
-              Disabled
-            </a>
-          </li>
-        </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Search
-          </button>
-        </form>
-      </div>
-    </nav>
-  );
+                {({ loading, error, data }) => {
+                    if (loading) return "Loading...";
+                    if (error) return `Error! ${error.message}`;
+                    return (
+                        <HealerCard key={data.healer.id} healer={data.healer} />
+                    );
+                }}
+            </Query>
+        );
+        return <div>{healer(healerId)}</div>;
+    }
 }
 
-export default Menu;
+export default Read;

@@ -3,16 +3,15 @@ import types from "./types";
 import axios from "axios";
 
 function* listAsync() {
-  let response = yield axios.get("http://localhost:3001/healers");
-  console.log("axios response");
-  console.log(response);
-  yield put({ type: types.LIST + "_saga", payload: response.data });
+    //let response = yield axios.get("http://localhost:4000/graphql");
+    console.log("axios response");
+    yield put({ type: types.LIST + "_saga", payload: [] });
 }
 
 const watchList = function*() {
-  yield takeLatest(types.LIST, listAsync);
+    yield takeLatest(types.LIST, listAsync);
 };
 
 export default {
-  watchList
+    watchList
 };
