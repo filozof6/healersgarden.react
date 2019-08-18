@@ -5,9 +5,9 @@ import { BrowserRouter, Link } from "react-router-dom";
 function Menu() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="#">
-                Navbar
-            </a>
+            <Link to={`/`} className="navbar-brand">
+                Healers Garden
+            </Link>
             <button
                 className="navbar-toggler"
                 type="button"
@@ -41,6 +41,16 @@ function Menu() {
                     <li className="nav-item">
                         <Link to={`/healers`} className="nav-link">
                             Healers
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={`/login`} className="nav-link">
+                            Login
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={`/register`} className="nav-link">
+                            Register
                         </Link>
                     </li>
                 </ul>
